@@ -25,7 +25,7 @@ jobs:
       runs-on: ubuntu-latest
       strategy: 
         matrix:
-          value: ${{ needs.build.outputs.keys }}
+          value: ${{ fromJSON(needs.build.outputs.keys) }}
       steps:
         - name: This is a test
           run: echo "hi" ${{ matrix.value }}
