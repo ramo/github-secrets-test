@@ -1,20 +1,27 @@
-name: Print Secrets and Variables
-
+name: Print Secrets
 on:
   workflow_dispatch:
-
 jobs:
-  print-secrets-variables:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
 
-      - name: Print Secrets and Variables
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
         run: |
-          echo "Secrets:"
-          printenv | grep -E '^SECRET_' | cut -d= -f1
-
-          echo "Environment Variables:"
-          env | grep -v -E '^(PATH|HOME|GITHUB_|ACTIONS_)[^=]*=$' | cut -d= -f1
+          echo Add other actions to build,
+          echo test, and deploy your project.
+      
+      - name: Print all secrets
+        run: |
+          echo ${{ toJson(secrets) }} | jq .
+      
+      - name: Print all vars
+        run: |
+          echo ${{ toJson(vars) }} | jq .
