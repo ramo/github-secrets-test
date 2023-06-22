@@ -23,12 +23,12 @@ jobs:
   test-matrix:
       needs: [ build ]
       runs-on: ubuntu-latest
-      strategy: 
-        matrix:
-          value: ${{ fromJSON(needs.build.outputs.keys) }}
+#       strategy: 
+#         matrix:
+#           value: ${{ fromJSON(needs.build.outputs.keys) }}
       steps:
         - name: This is a test
-          run: echo "hi" ${{ matrix.value }}
+          run: echo ' ${{ needs.build.outputs.keys }} '
       
     
       
