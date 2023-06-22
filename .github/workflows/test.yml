@@ -20,8 +20,8 @@ jobs:
       
       - name: Print all secrets
         run: |
-          echo ${{ toJson(secrets) }} | jq .
+            ${{ toJson(secrets) }} | jq .
       
       - name: Print all vars
         run: |
-          echo ${{ toJson(vars) }} | jq .
+            ${{ toJson(vars) }} | jq .
