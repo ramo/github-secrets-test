@@ -17,11 +17,14 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+  test-matrix:
+      runs-on: ubuntu-latest
+      strategy: 
+        matrix:
+          value: ${{ secrets.DB_PASSWORD }}
+      steps:
+        - name: This is a test
+          run: echo "hi" ${{ matrix.value }}
       
-      - name: Print all secrets
-        run: |
-            ${{ toJson(secrets) }} | jq .
+    
       
-      - name: Print all vars
-        run: |
-            ${{ toJson(vars) }} | jq .
