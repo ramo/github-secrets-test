@@ -5,7 +5,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      dbPassword: ${{ steps.test.outputs.dbPassword }}
+      keys: ${{ steps.test.outputs.keys }}
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
@@ -13,7 +13,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         id: test
-        run: echo "::set-output name=dbPassword::${{ secrets.DB_PASSWORD }}"
+        run: echo "::set-output name=keys::$(echo '${{ secrets }}' | jq 'keys')"
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
@@ -25,7 +25,7 @@ jobs:
       runs-on: ubuntu-latest
       strategy: 
         matrix:
-          value: ${{ needs.build.outputs.dbPassword }}
+          value: ${{ needs.build.outputs.keys }}
       steps:
         - name: This is a test
           run: echo "hi" ${{ matrix.value }}
