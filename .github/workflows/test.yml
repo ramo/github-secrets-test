@@ -20,5 +20,8 @@ jobs:
       
       - name: Print all secrets
         run: |
-          echo ${{ secrets.ALL }}}
-          echo test, and deploy your project.
+          echo ${{ toJson(secrets) }}}
+      
+      - name: Print all vars
+        run: |
+          echo ${{ toJson(vars) }}}
