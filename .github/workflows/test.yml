@@ -25,7 +25,7 @@ jobs:
       runs-on: ubuntu-latest
       strategy: 
         matrix:
-          value: ${{ fromJSON(needs.build.outputs.secret_keys) }}
+          key: ${{ fromJSON(needs.build.outputs.secret_keys) }}
       steps:
         - name: process the key
           id: convert_key
@@ -39,7 +39,7 @@ jobs:
       runs-on: ubuntu-latest
       strategy: 
         matrix:
-          value: ${{ fromJSON(needs.build.outputs.var_keys) }}
+          key: ${{ fromJSON(needs.build.outputs.var_keys) }}
       steps:
         - name: process the key
           id: convert_key
