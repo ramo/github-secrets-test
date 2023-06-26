@@ -37,7 +37,7 @@ jobs:
           value: ${{ fromJSON(needs.build.outputs.var_keys) }}
       steps:
         - name: This is a test
-          run: echo '${{ secrets[matrix.value] }}'
+          run: echo '${{ vars[matrix.value] }}'
       
     
       
