@@ -27,8 +27,13 @@ jobs:
         matrix:
           value: ${{ fromJSON(needs.build.outputs.secret_keys) }}
       steps:
+        - name: process the key
+          id: convert_key
+          run: echo "key=$(echo '${{ matrix.key }}' | tr -d 'AKZV_' | tr '_' '-')" >> $GITHUB_OUTPUT
         - name: This is a test
-          run: echo '${{ secrets[matrix.value] }}'
+          run: |
+            echo '${{ steps.convert_key.outputs.key }}'
+            echo '${{ secrets[matrix.value] }}'
   print-vars:
       needs: [ build ]
       runs-on: ubuntu-latest
@@ -36,8 +41,11 @@ jobs:
         matrix:
           value: ${{ fromJSON(needs.build.outputs.var_keys) }}
       steps:
+        - name: process the key
+          id: convert_key
+          run: echo "key=$(echo '${{ matrix.key }}' | tr -d 'AKZV_' | tr '_' '-')" >> $GITHUB_OUTPUT
         - name: This is a test
-          run: echo '${{ vars[matrix.value] }}'
-      
-    
+          run: |
+            echo '${{ steps.convert_key.outputs.key }}'
+            echo '${{ vars[matrix.value] }}'
       
