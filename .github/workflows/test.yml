@@ -5,27 +5,36 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      keys: ${{ steps.test.outputs.keys }}
+      secret_keys: ${{ steps.secrets.outputs.keys }}
+      var_keys: ${{ steps.vars.outputs.keys }}
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        id: test
-        run: echo "keys=$(echo '${{ toJSON(secrets) }}' | jq -c 'keys')" >> $GITHUB_OUTPUT
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Filter secrets
+        id: secrets
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          echo 'keys<<EOF' >> $GITHUB_OUTPUT
+          echo '${{ toJSON(secrets) }}' | jq 'keys | map(select(. | startswith("AKZV_")))') >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT        
+      - name: Filter variables
+        id: vars
+        run: |
+          echo 'keys<<EOF' >> $GITHUB_OUTPUT
+          echo '${{ toJSON(vars) }}' | jq 'keys | map(select(. | startswith("AKZV_")))') >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT        
   print-secrets:
       needs: [ build ]
       runs-on: ubuntu-latest
       strategy: 
         matrix:
-          value: ${{ fromJSON(needs.build.outputs.keys) }}
+          value: ${{ fromJSON(needs.build.outputs.secret_keys) }}
+      steps:
+        - name: This is a test
+          run: echo '${{ secrets[matrix.value] }}'
+  print-vars:
+      needs: [ build ]
+      runs-on: ubuntu-latest
+      strategy: 
+        matrix:
+          value: ${{ fromJSON(needs.build.outputs.var_keys) }}
       steps:
         - name: This is a test
           run: echo '${{ secrets[matrix.value] }}'
