@@ -29,11 +29,11 @@ jobs:
       steps:
         - name: process the key
           id: convert_key
-          run: echo "key=$(echo '${{ matrix.key }}' | tr -d 'AKZV_' | tr '_' '-')" >> $GITHUB_OUTPUT
+          run: echo "key=$(echo '${{ matrix.key }}' | sed 's/AZKV_//' | tr '_' '-')" >> $GITHUB_OUTPUT
         - name: This is a test
           run: |
             echo '${{ steps.convert_key.outputs.key }}'
-            echo '${{ secrets[matrix.value] }}'
+            echo '${{ secrets[matrix.key] }}'
   print-vars:
       needs: [ build ]
       runs-on: ubuntu-latest
@@ -43,9 +43,9 @@ jobs:
       steps:
         - name: process the key
           id: convert_key
-          run: echo "key=$(echo '${{ matrix.key }}' | tr -d 'AKZV_' | tr '_' '-')" >> $GITHUB_OUTPUT
+          run: echo "key=$(echo '${{ matrix.key }}' | sed 's/AZKV_//' | tr '_' '-')" >> $GITHUB_OUTPUT
         - name: This is a test
           run: |
             echo '${{ steps.convert_key.outputs.key }}'
-            echo '${{ vars[matrix.value] }}'
+            echo '${{ vars[matrix.key] }}'
       
