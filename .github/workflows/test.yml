@@ -12,13 +12,13 @@ jobs:
         id: secrets
         run: |
           echo 'keys<<EOF' >> $GITHUB_OUTPUT
-          echo '${{ toJSON(secrets) }}' | jq 'keys | map(select(. | startswith("AKZV_")))' >> $GITHUB_OUTPUT
+          echo '${{ toJSON(secrets) }}' | jq 'keys | map(select(. | startswith("AZKV_")))' >> $GITHUB_OUTPUT
           echo 'EOF' >> $GITHUB_OUTPUT        
       - name: Filter variables
         id: vars
         run: |
           echo 'keys<<EOF' >> $GITHUB_OUTPUT
-          echo '${{ toJSON(vars) }}' | jq 'keys | map(select(. | startswith("AKZV_")))' >> $GITHUB_OUTPUT
+          echo '${{ toJSON(vars) }}' | jq 'keys | map(select(. | startswith("AZKV_")))' >> $GITHUB_OUTPUT
           echo 'EOF' >> $GITHUB_OUTPUT        
   print-secrets:
       needs: [ build ]
