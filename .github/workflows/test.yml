@@ -12,13 +12,13 @@ jobs:
         id: secrets
         run: |
           echo 'keys<<EOF' >> $GITHUB_OUTPUT
-          echo '${{ toJSON(secrets) }}' | jq 'keys | map(select(. | startswith("AZKV_")))' >> $GITHUB_OUTPUT
+          echo '${{ toJSON(secrets) }}' | jq 'keys | map(select(. | startswith("${{vars.APP_VAR_PREFIX}}")))' >> $GITHUB_OUTPUT
           echo 'EOF' >> $GITHUB_OUTPUT        
       - name: Filter variables
         id: vars
         run: |
           echo 'keys<<EOF' >> $GITHUB_OUTPUT
-          echo '${{ toJSON(vars) }}' | jq 'keys | map(select(. | startswith("AZKV_")))' >> $GITHUB_OUTPUT
+          echo '${{ toJSON(vars) }}' | jq 'keys | map(select(. | startswith("${{vars.APP_VAR_PREFIX}}")))' >> $GITHUB_OUTPUT
           echo 'EOF' >> $GITHUB_OUTPUT        
   print-secrets:
       needs: [ build ]
@@ -29,7 +29,7 @@ jobs:
       steps:
         - name: process the key
           id: convert_key
-          run: echo "key=$(echo '${{ matrix.key }}' | sed 's/AZKV_//' | tr '_' '-')" >> $GITHUB_OUTPUT
+          run: echo "key=$(echo '${{ matrix.key }}' | sed 's/${{vars.APP_VAR_PREFIX}}//' | sed 's/_/-/g')" >> $GITHUB_OUTPUT
         - name: This is a test
           run: |
             echo '${{ steps.convert_key.outputs.key }}'
@@ -43,7 +43,7 @@ jobs:
       steps:
         - name: process the key
           id: convert_key
-          run: echo "key=$(echo '${{ matrix.key }}' | sed 's/AZKV_//' | tr '_' '-')" >> $GITHUB_OUTPUT
+          run: echo "key=$(echo '${{ matrix.key }}' | sed 's/${{vars.APP_VAR_PREFIX}}//' | sed 's/_/-/g')" >> $GITHUB_OUTPUT
         - name: This is a test
           run: |
             echo '${{ steps.convert_key.outputs.key }}'
