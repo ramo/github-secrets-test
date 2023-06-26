@@ -20,7 +20,7 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-  test-matrix:
+  print-secrets:
       needs: [ build ]
       runs-on: ubuntu-latest
       strategy: 
@@ -28,7 +28,7 @@ jobs:
           value: ${{ fromJSON(needs.build.outputs.keys) }}
       steps:
         - name: This is a test
-          run: echo '${{ matrix.value }}'
+          run: echo '${{ secrets[matrix.value] }}'
       
     
       
