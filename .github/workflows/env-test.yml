@@ -13,7 +13,7 @@ jobs:
         with: 
           log-variables: true
           export-variables: true
-          key-case: bypass
+          keys-case: bypass
       - name: Test environment variables
         run: |
           echo ${{ env.PROJECT_NAME }}
