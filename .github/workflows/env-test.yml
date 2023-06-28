@@ -17,6 +17,6 @@ jobs:
           keys-case: bypass
       - name: Test environment variables
         run: |
-          echo ${{ env.PROJECT_NAME }}
-          echo ${{ env.PROJECT_OWNER }}
+          echo ${{ PROJECT_NAME }}
+          echo ${{ PROJECT_OWNER }}
       
