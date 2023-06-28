@@ -5,6 +5,8 @@ jobs:
   init:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout the current project
+        uses: actions/checkout@v2
       - name: Load .env file
         id: dotenv
         uses: falti/dotenv-action@v1.0.4
