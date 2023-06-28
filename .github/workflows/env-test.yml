@@ -1,0 +1,19 @@
+name: Print Secrets
+on:
+  workflow_dispatch:
+jobs:
+  init:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Load .env file
+        id: dotenv
+        uses: falti/dotenv-action@v1.0.4
+        with: 
+          log-variables: true
+          export-variables: true
+          key-case: bypass
+      - name: Test environment variables
+        run: |
+          echo ${{ env.PROJECT_NAME }}
+          echo ${{ env.PROJECT_OWNER }}
+      
