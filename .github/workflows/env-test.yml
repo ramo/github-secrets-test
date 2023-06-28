@@ -17,6 +17,12 @@ jobs:
           keys-case: bypass
       - name: Test environment variables
         run: |
-          echo ${{ PROJECT_NAME }}
-          echo ${{ PROJECT_OWNER }}
-      
+          echo ${{ env.PROJECT_NAME }}
+          echo ${{ env.PROJECT_OWNER }}
+  second-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print variables from init job
+        run: |
+          echo ${{ needs.init.outputs.PROJECT_NAME }}
+          echo ${{ needs.init.env.PROJECT_NAME }}
