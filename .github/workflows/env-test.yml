@@ -1,4 +1,4 @@
-name: Print Secrets
+name: Print Environment variables
 on:
   workflow_dispatch:
 jobs:
