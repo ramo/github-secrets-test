@@ -6,6 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TEST: "this is a test"
+    outputs:
+      PROJECT_NAME: ${{ steps.dotenv.outputs.PROJECT_NAME }}
+      PROJECT_OWNER: ${{ steps.dotenv.outputs.PROJECT_OWNER }}
     steps:
       - name: Checkout the current project
         uses: actions/checkout@v2
@@ -27,6 +30,8 @@ jobs:
     steps:
       - name: print variables from init job
         run: |
-          echo ${{ needs.init.steps.dotenv.outputs.PROJECT_NAME }}
-          echo ${{ needs.init.env.TEST }}
-          echo ${{ needs.init.env.PROJECT_NAME }}
+          echo "project name from dotenv output: ${{ needs.init.steps.dotenv.outputs.PROJECT_NAME }}"
+          echo "test env from init: ${{ needs.init.env.TEST }}"
+          echo "project env from init: ${{ needs.init.env.PROJECT_NAME }}"
+          echo "project name from outputs: ${{ needs.init.outputs.PROJECT_NAME }}"
+          echo "project owner from outputs: ${{ needs.init.outputs.PROJECT_OWNER }}"
