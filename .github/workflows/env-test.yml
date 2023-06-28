@@ -30,6 +30,7 @@ jobs:
     steps:
       - name: print variables from init job
         run: |
+          echo "init job object: ${{ needs.init }}"
           echo "project name from dotenv output: ${{ needs.init.steps.dotenv.outputs.PROJECT_NAME }}"
           echo "test env from init: ${{ needs.init.env.TEST }}"
           echo "project env from init: ${{ needs.init.env.PROJECT_NAME }}"
