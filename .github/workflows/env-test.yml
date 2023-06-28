@@ -4,8 +4,9 @@ on:
 jobs:
   init:
     runs-on: ubuntu-latest
+    name: "Job name: ${{ env.TEST }}"
     env:
-      TEST: "this is a test"
+      TEST: "test heading"
     outputs:
       PROJECT_NAME: ${{ steps.dotenv.outputs.PROJECT_NAME }}
       PROJECT_OWNER: ${{ steps.dotenv.outputs.PROJECT_OWNER }}
