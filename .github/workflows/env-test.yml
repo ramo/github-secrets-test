@@ -4,6 +4,8 @@ on:
 jobs:
   init:
     runs-on: ubuntu-latest
+    env:
+      TEST: "this is a test"
     steps:
       - name: Checkout the current project
         uses: actions/checkout@v2
@@ -25,5 +27,6 @@ jobs:
     steps:
       - name: print variables from init job
         run: |
-          echo ${{ needs.init.outputs.PROJECT_NAME }}
+          echo ${{ needs.init.steps.dotenv.outputs.PROJECT_NAME }}
+          echo ${{ needs.init.env.TEST }}
           echo ${{ needs.init.env.PROJECT_NAME }}
