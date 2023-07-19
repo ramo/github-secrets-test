@@ -1,0 +1,10 @@
+name: My workflow
+on:
+  workflow_call:
+    
+jobs:
+  init:
+    runs-on: ubuntu-latest
+    name: "this is a test"
+    run: |
+      echo ${{  vars.ENVIRONMENT }}
