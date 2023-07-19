@@ -6,5 +6,7 @@ jobs:
   init:
     runs-on: ubuntu-latest
     name: "this is a test"
-    run: |
-      echo ${{  vars.ENVIRONMENT }}
+    steps:
+      - name: "print"
+        run: |
+          echo ${{  vars.ENVIRONMENT }}
