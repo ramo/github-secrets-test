@@ -18,4 +18,3 @@ jobs:
   another:
     needs: [ init ]
     uses: ./.github/workflows/my_workflow.yml
-    secrets: inherit
