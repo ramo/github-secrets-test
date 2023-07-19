@@ -5,6 +5,7 @@ on:
 jobs:
   init:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
     name: "this is a test"
     steps:
       - name: "print"
