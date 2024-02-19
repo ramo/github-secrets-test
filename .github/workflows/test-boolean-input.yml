@@ -1,0 +1,40 @@
+name: Create Service Bus entities
+on:
+  workflow_dispatch:
+    inputs:
+      environment-name:
+        description: "Environment name"
+        required: true
+      geography-name:
+        type: choice
+        description: "Geography"
+        default: 'us'
+        required: true
+        options:
+          - apac
+          - au
+          - eu
+          - us
+      delete-existing-entities:
+        type: boolean
+        description: "Delete existing entities"
+        default: false
+        required: false
+
+  workflow_call:
+    inputs:
+      delete-existing-entities:
+        type: boolean
+        description: "Delete existing entities"
+        default: false
+        required: false
+    
+jobs:
+  init:
+    name: This is a test
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment-name }}
+    steps:
+      - name: This is a step test
+        run: |
+          echo "Hello test"
