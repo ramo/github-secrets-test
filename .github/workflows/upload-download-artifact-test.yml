@@ -11,7 +11,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: token
-        path: ~/.stratosphere_access_token
+        path: "~/.stratosphere_access_token"
   download:
     runs-on: ubuntu-latest
     steps:
@@ -19,7 +19,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: token
-        path: ~/.stratosphere_access_token
+        path: "~"
     - name: test
       run: |
          cat ~/.stratosphere_access_token
