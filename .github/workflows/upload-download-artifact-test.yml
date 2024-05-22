@@ -6,11 +6,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: |
-        echo "hello" > "~/.stratosphere_access_token"
+        echo "hello" > ~/.stratosphere_access_token
     - name: upload token to artifact
       uses: actions/upload-artifact@v3
       with:
         name: token
-        path: "~/.stratosphere_access_token"
+        path: ~/.stratosphere_access_token
     
         
