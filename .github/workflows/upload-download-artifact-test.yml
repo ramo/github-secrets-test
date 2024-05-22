@@ -13,6 +13,7 @@ jobs:
         name: token
         path: "~/.stratosphere_access_token"
   download:
+    needs: upload
     runs-on: ubuntu-latest
     steps:
     - name: download token
