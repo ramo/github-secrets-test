@@ -20,6 +20,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: token
+        path: "~"
     - name: test
       run: |
          pwd
