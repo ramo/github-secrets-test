@@ -1,0 +1,13 @@
+name: Test Concurrency
+on:
+  workflow_dispatch:
+concurrency: test
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo "Hello, I am sleeping"
+        sleep 60
+        echo "Bye!"
+        
