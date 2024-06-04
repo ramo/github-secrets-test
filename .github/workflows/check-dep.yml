@@ -1,0 +1,20 @@
+name: Check Job Dependency
+on:
+  workflow_dispatch:
+    inputs:
+      setup:
+        description: Setup
+        required: true
+        type: boolean
+jobs:
+  setup:
+    if: ${{ inputs.setup == true }}
+    runs-on: ubuntu-latest
+    steps:
+    - run:  echo "Running setup"
+  work:
+    needs: [ setup ]
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "Running work"
+    
