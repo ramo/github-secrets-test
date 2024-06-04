@@ -7,7 +7,12 @@ on:
         required: true
         type: boolean
 jobs:
+  init:
+    runs-on: ubuntu
+    steps:
+    - run: echo "Init"
   setup:
+    needs: [init]
     if: ${{ inputs.setup == true }}
     runs-on: ubuntu-latest
     steps:
