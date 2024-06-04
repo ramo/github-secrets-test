@@ -1,7 +1,9 @@
 name: Test Concurrency
 on:
   workflow_dispatch:
-concurrency: test
+concurrency:
+  group: test
+  cancel-in-progress: true
 jobs:
   test:
     runs-on: ubuntu-latest
