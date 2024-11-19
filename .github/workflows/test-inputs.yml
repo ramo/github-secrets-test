@@ -24,5 +24,7 @@ jobs:
     steps:
       - name: Print environment
         run: |
-          echo ${{ inputs.environment }}
+          echo "Environment: ${{ inputs.environment }}"
+          echo "Test: ${{ inputs.test }}"
+          
         
