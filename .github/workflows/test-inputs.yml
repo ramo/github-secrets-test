@@ -12,6 +12,12 @@ on:
          - 'prod'
         default: 'dev'
   workflow_call:
+    inputs:
+      environment:
+        type: string
+      test:
+        type: boolean
+        
 jobs:
   build:
     runs-on: ubuntu-latest
