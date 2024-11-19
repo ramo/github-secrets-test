@@ -2,7 +2,7 @@ name: Call Test inputs context
 on:
   workflow_dispatch:
     inputs:
-      env:
+      environment:
         description: 'Environment'
         type: choice
         required: true
