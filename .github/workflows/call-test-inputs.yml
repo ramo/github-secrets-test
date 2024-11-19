@@ -1,0 +1,18 @@
+name: Call Test inputs context
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        description: 'Environment'
+        type: choice
+        required: true
+        options:
+         - 'dev'
+         - 'qa'
+         - 'prod'
+        default: 'dev'
+  workflow_call:
+jobs:
+  build:
+    uses: ./.github/workflows/test-inputs.yml
+    secrets: inherit
