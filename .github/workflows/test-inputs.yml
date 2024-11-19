@@ -15,8 +15,10 @@ on:
     inputs:
       environment:
         type: string
+        required: true
       test:
         type: boolean
+        default: false
         
 jobs:
   build:
