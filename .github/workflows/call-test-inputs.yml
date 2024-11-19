@@ -15,4 +15,6 @@ on:
 jobs:
   build:
     uses: ./.github/workflows/test-inputs.yml
+    with:
+      environment: ${{ inputs.env }}
     secrets: inherit
