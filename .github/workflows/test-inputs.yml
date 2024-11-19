@@ -1,0 +1,22 @@
+name: Test inputs context
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment'
+        type: choice
+        required: true
+        options:
+         - 'dev'
+         - 'qa'
+         - 'prod'
+        default: 'dev'
+  workflow_call:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print environment
+        run: |
+          echo ${{ inputs.environment }}
+        
