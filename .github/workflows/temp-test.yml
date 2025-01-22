@@ -1,0 +1,13 @@
+name: Deploy Language Packs
+on:
+  workflow_dispatch:
+    inputs:
+      environmentName:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'dev'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello, world!"
